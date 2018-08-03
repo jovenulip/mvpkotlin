@@ -15,9 +15,12 @@ class MainActivity : AppCompatActivity(), MainContract.View {
 
         presenter = MainPresenter(this)
 
-        button.setOnClickListener {
-            presenter.changeText(text1.text.toString())
+        btnBooking.setOnClickListener {
+            presenter.getAvailability()
+        }
 
+        btnCar.setOnClickListener {
+            presenter.getLocation()
         }
     }
 

@@ -9,5 +9,7 @@ interface MainContract {
     }
     interface Presenter : BasePresenter {
         fun changeText(s: String)
+        fun getAvailability()
+        fun getLocation()
     }
 }
