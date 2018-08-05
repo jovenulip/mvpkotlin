@@ -1,8 +1,12 @@
 package com.dyuben.mvpkotlin.main
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.LinearLayoutManager
 import com.dyuben.mvpkotlin.R
+import com.dyuben.mvpkotlin.car.CarLocationActivity
+import com.dyuben.mvpkotlin.data.BookingModel
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), MainContract.View {
@@ -16,16 +20,17 @@ class MainActivity : AppCompatActivity(), MainContract.View {
         presenter = MainPresenter(this)
 
         btnBooking.setOnClickListener {
-            presenter.getAvailability()
+            presenter.getBookings()
         }
 
         btnCar.setOnClickListener {
-            presenter.getLocation()
+            startActivity(Intent(this, CarLocationActivity::class.java))
         }
     }
 
-    override fun updateText(s: String) {
-        text1.text = s
+    override fun showBookings(mList: List<BookingModel.DataItems>) {
+        rvBookingList.layoutManager = LinearLayoutManager(this)
+        rvBookingList.adapter = BookingAdapter(this, mList)
     }
 
     override fun showError() {
